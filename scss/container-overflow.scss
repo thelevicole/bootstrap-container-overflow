@@ -1,0 +1,78 @@
+/**
+ * Set the element width from the edge of
+ * the viewport and relative to bootstrap container.
+ *
+ * @param	{Number}	$col-span	Specify how many columns to span
+ */
+@mixin container-overflow( $col-span: 12 ) {
+
+	/**
+	 * Set default for XS devices
+	 */
+	width: 100%;
+
+	/**
+	 * Loop through each container width
+	 *
+	 * @param	{String}	$prefix		Name of the container width
+	 * @param	{Number}	$size		Width of the container
+	 */
+	@each $prefix, $size in $container-max-widths {
+
+		/**
+		 * Only apply styles to this breakpoint
+		 */
+		@include media-breakpoint-up( $prefix ) {
+
+			/**
+			 * Calculate the full container width including the gutter
+			 */
+			$container-size: ( $size  + $grid-gutter-width );
+
+			/**
+			 * Create empty map
+			 */
+			$columns: ();
+
+			/**
+			 * Create a width for each column in the grid
+			 */
+			@for $index from 1 through $grid-columns {
+
+				/**
+				 * Column span percentage
+				 */
+				$col-percent: ( 100 / $grid-columns ) * $index;
+
+				/**
+				 * Container offset in pixels
+				 */
+				$offset: $col-percent / 100 * $container-size;
+
+				/**
+				 * 1. Calculate the margin width between the container and the window.
+				 * 100vw - container-size
+				 *
+				 * 2. Divide the margin by two. This get the margin for one side of the container.
+				 * ( 100vw - container-size ) / 2
+				 *
+				 * 3. Add the column width offset.
+				 * ( ( 100vw - container-size ) / 2 ) + offset
+				 */
+				$width: calc( ( ( 100vw - #{ $container-size } ) / 2 ) + #{ $offset } );
+
+				/**
+				 * Push width to map
+				 */
+				$columns: map-merge( $columns, (
+					$index: $width
+				) );
+			}
+
+			/**
+			 * Set width based on column span and breakpoint
+			 */
+			width: map-get( $columns, $col-span );
+		}
+	}
+}

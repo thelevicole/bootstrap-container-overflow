@@ -1,0 +1,53 @@
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+@import 'container-overflow';
+
+
+.placeholder {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	background: {
+		color: #eee;
+		size: cover;
+		position: center;
+	};
+}
+
+.position-relative { z-index: 1; }
+
+.example-1 {
+	.placeholder {
+		left: 0;
+		@include container-overflow;
+	}
+}
+
+
+.example-2 {
+	.placeholder {
+		right: 0;
+		@include container-overflow( 8 );
+	}
+}
+
+.example-3 {
+	.placeholder {
+		left: 0;
+		@include container-overflow( 7 );
+	}
+}
+
+.example-4 {
+	.placeholder {
+		left: 0;
+		@include container-overflow( 6 );
+	}
+}
+
+.example-5 {
+	.placeholder {
+		right: 0;
+		@include container-overflow( 6 );
+	}
+}
