@@ -55,6 +55,18 @@
 	}
 }
 
+.example-6 {
+	.placeholder.left {
+		left: 0;
+		@include container-overflow( 3 );
+	}
+
+	.placeholder.right {
+		right: 0;
+		@include container-overflow( 3 );
+	}
+}
+
 // Spans
 //
 //
