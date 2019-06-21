@@ -16,13 +16,16 @@
 
 .position-relative { z-index: 1; }
 
+
+// Examples
+//
+//
 .example-1 {
 	.placeholder {
 		left: 0;
 		@include container-overflow;
 	}
 }
-
 
 .example-2 {
 	.placeholder {
@@ -49,5 +52,18 @@
 	.placeholder {
 		right: 0;
 		@include container-overflow( 6 );
+	}
+}
+
+// Spans
+//
+//
+
+@for $i from 1 through 12 {
+	.span-#{$i} {
+		.placeholder {
+			left: 0;
+			@include container-overflow( $i );
+		}
 	}
 }
